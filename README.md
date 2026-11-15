@@ -137,7 +137,7 @@ npm start -- --hostname 127.0.0.1 --port 3000
 
 ## 验证记录
 
-阶段实现、检查结果和未覆盖范围见 [docs/stages.md](docs/stages.md) 与 [docs/quick-preview.md](docs/quick-preview.md)。本轮执行了 lint、无 Token 生产构建、只读 Notion 连接检查及关键浏览器冒烟；未执行完整自动化回归、跨浏览器或真实手机验收。
+阶段实现、检查结果和未覆盖范围见 [docs/stages.md](docs/stages.md) 与 [docs/quick-preview.md](docs/quick-preview.md)。公开仓库 CI 已通过 lint、25 项离线测试和无 Token 生产构建；本轮未运行包含真实 Notion 自检的 `npm run check`，也未完成跨浏览器或真实手机验收。
 
 `?view=open|completed|trash` 支持视图直达及浏览器历史，非法值回待完成。电脑侧栏可收起；手机默认关闭，以覆盖式抽屉打开，支持 Escape 和焦点管理。回收站链接打开数据库，不直接打开工作区回收站。
 

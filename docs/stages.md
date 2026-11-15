@@ -49,4 +49,4 @@ Production smoke check returned HTTP 200. Browser verification covered the updat
 
 ## 18. 快速冒烟与预览
 
-最终 lint、无 Token build、真实七属性只读自检通过。专用任务验证新增、编号／优先级、真实完成时间刷新保持及恢复；桌面／320px、已完成视图和回收站入口完成浏览器检查。HTML 和 13 个静态资源未发现配置 Token。未新增自动化测试，未执行完整 `npm test`／`npm run check` 回归。详细范围见 [quick-preview.md](quick-preview.md)。
+最终 lint、无 Token build、真实七属性只读自检通过。专用任务验证新增、编号／优先级、真实完成时间刷新保持及恢复；桌面／320px、已完成视图和回收站入口完成浏览器检查。HTML 和 13 个静态资源未发现配置 Token。公开仓库 CI 后续通过 npm ci、lint、25 项离线测试和生产构建；本阶段未新增测试，也未运行包含真实 Notion 自检的 `npm run check`。详细范围见 [quick-preview.md](quick-preview.md)。
