@@ -1,0 +1,128 @@
+/* Adapted from Water.css 2.1.1 and Todoist clone 116d18c (MIT).
+   Sidebar/Content structure retained; source mapping: docs/third-party.md. */
+:root {
+  --paper: #fff;
+  --surface: #fff;
+  --sidebar: #fafafa;
+  --ink: #24332f;
+  --muted: #59665f;
+  --line: #d7ddd6;
+  --accent: #245c45;
+  --danger: #a13428;
+  --focus: #336bba;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+html { scrollbar-color: #94a098 var(--surface); scrollbar-width: thin; }
+body { font-family: system-ui, sans-serif; color: var(--ink); background: var(--surface); line-height: 1.6; margin: 0; overflow-wrap: anywhere; text-rendering: optimizeLegibility; }
+h1 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -.03em; margin: 0; }
+h2 { font-size: 1.5rem; font-weight: 600; margin: 0; }
+p { margin: 8px 0; }
+a { color: var(--accent); text-underline-offset: 4px; }
+a:hover { text-decoration-thickness: 2px; }
+button, input, textarea, select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+button { cursor: pointer; min-height: 44px; transition: background-color .1s linear; }
+button:hover { background: #e7ede6; }
+button:disabled, input:disabled, textarea:disabled, select:disabled { cursor: not-allowed; opacity: .55; }
+.primary { color: #fff; background: var(--accent); border-color: var(--accent); padding-inline: 24px; }
+.primary:hover { background: #194331; }
+input:not([type='checkbox']), textarea, select { display: block; width: 100%; min-width: 0; }
+input[type='checkbox'] { width: 20px; height: 20px; margin: 0; border-radius: 0; accent-color: var(--accent); cursor: pointer; }
+label { display: block; font-size: .875rem; margin-bottom: 6px; }
+textarea { resize: vertical; min-height: 88px; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; min-width: 0; }
+.field { min-width: 0; }
+.title-field, .notes-field, .dialog-actions { grid-column: 1 / -1; }
+[role='alert'] { color: var(--danger); }
+[role='status'] { color: var(--accent); }
+[role='status']:empty { display: none; }
+[aria-invalid='true'] { border-color: var(--danger); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+::selection { background: #c7dfcb; color: var(--ink); }
+input, textarea { caret-color: var(--accent); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+[hidden] { display: none !important; }
+
+.app-shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); width: 100vw; height: 100vh; height: 100dvh; overflow: hidden; transition: grid-template-columns 240ms cubic-bezier(.22, 1, .36, 1); }
+.app-shell--collapsed { grid-template-columns: 64px minmax(0, 1fr); }
+.sidebar { min-height: 0; overflow: hidden; background: var(--sidebar); border-right: 1px solid var(--line); }
+.sidebar-brand { display: flex; align-items: center; gap: 12px; height: 88px; padding: 16px 10px; white-space: nowrap; }
+.navigation-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; flex: 0 0 44px; background: transparent; border-color: transparent; }
+.desktop-sidebar { width: 239px; padding: 12px; }
+.app-shell--collapsed .desktop-sidebar, .app-shell--collapsed .sidebar-brand h1 { visibility: hidden; }
+.sidebar__generic { padding: 0; margin: 0; list-style: none; }
+.sidebar__generic li { line-height: 1.5; font-size: 15px; padding: 0; margin-bottom: 4px; }
+.sidebar__generic a { display: flex; align-items: center; padding: 12px; width: 100%; gap: 10px; text-decoration: none; border-radius: 6px; color: var(--ink); min-height: 48px; }
+.sidebar__generic a:hover { background: #e7ede6; }
+.sidebar__generic li.active a { color: var(--accent); font-weight: 600; background: #e7ede6; }
+.nav-count { margin-left: auto; color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
+.tasks { min-width: 0; min-height: 0; overflow: auto; background: var(--surface); padding: 48px 32px 72px; }
+.tasks-inner { width: 100%; max-width: 800px; margin: 0 auto; }
+.view-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 24px; }
+.view-heading > span, .muted { color: var(--muted); font-size: .875rem; }
+.new-task { margin: 0 0 24px; }
+.new-task > [role='status'] { margin-top: 16px; }
+.empty-state { color: var(--muted); padding-block: 32px; }
+
+.table-scroll { width: 100%; max-width: 100%; overflow-x: auto; }
+.task-table { width: 800px; table-layout: fixed; border-collapse: collapse; font-size: .875rem; }
+.number-column { width: 56px; }
+.date-column { width: 128px; }
+.content-column { width: 299px; }
+.priority-column { width: 72px; }
+.status-column { width: 244px; }
+.task-table th, .task-table td { border: 1px solid var(--line); padding: 14px 12px; vertical-align: middle; }
+.task-table th { text-align: center; font-weight: 600; background: var(--sidebar); padding-block: 12px; }
+.task-table tbody tr:hover { background: #fafaf7; }
+.number-cell, .priority-cell, .status-cell { text-align: center; }
+.number-cell, .date-cell, .completion-time { font-variant-numeric: tabular-nums; }
+.number-cell { color: var(--muted); }
+.date-cell { text-align: center; }
+.date-cell strong { display: block; color: var(--danger); font-size: .8rem; font-weight: 600; }
+.overdue .date-cell { color: var(--danger); }
+.task-content a { font-weight: 600; }
+.task-notes { white-space: pre-wrap; color: var(--muted); font-size: .8rem; margin: 6px 0 0; }
+.completion-time { font-size: .8rem; white-space: nowrap; margin: 0; }
+.completion-form { display: flex; justify-content: center; }
+.completion-form label { position: relative; display: flex; align-items: center; justify-content: center; width: 44px; min-height: 44px; margin: 0; cursor: pointer; }
+.restore-button { color: var(--accent); background: transparent; border-color: transparent; font-size: .8rem; padding: 8px 12px; }
+.status-cell [role='alert'], .status-cell [role='status'] { font-size: .8rem; }
+
+.trash-info { max-width: 65ch; }
+.trash-info h3 { margin-top: 0; }
+.trash-info li { padding-block: 6px; }
+.notion-link { display: inline-flex; align-items: center; min-height: 44px; margin-block: 12px; }
+dialog { max-width: min(600px, calc(100vw - 32px)); width: 100%; max-height: calc(100dvh - 32px); overflow: auto; border: 0; border-radius: 12px; padding: 24px; color: var(--ink); background: var(--surface); box-shadow: 0 16px 64px #17281e33; }
+dialog::backdrop { background: #17281e80; }
+.dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.dialog-heading h2 { font-size: 1.125rem; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 12px; }
+.create-dialog form { display: block; }
+dialog.navigation-drawer { position: fixed; inset: 0 auto 0 0; margin: 0; border-radius: 0; max-width: min(300px, calc(100vw - 32px)); width: 100%; height: 100dvh; max-height: 100dvh; padding: 0; background: var(--sidebar); }
+.drawer-inner { min-height: 100%; padding: 20px 16px; }
+.drawer-inner > button { margin-bottom: 28px; }
+.route-state { width: 100vw; height: 100vh; height: 100dvh; overflow: auto; padding: 48px 24px; }
+
+/* Vendor calendar mechanics and state styles remain in react-datepicker.css. */
+.field-help { color: var(--muted); font-size: .8rem; margin-top: 6px; }
+.react-datepicker-wrapper { width: 100%; }
+.react-datepicker { font-family: inherit; color: var(--ink); border-color: var(--line); }
+.react-datepicker-popper { z-index: 10; max-width: calc(100vw - 24px); }
+.react-datepicker .react-datepicker__navigation { padding: 0; min-height: 32px; background: transparent; border: 0; border-radius: 0; }
+.react-datepicker .react-datepicker__navigation:hover { background: #e7ede6; }
+.react-datepicker__close-icon { min-height: 32px; padding: 0 8px; border: 0; background: transparent; }
+.react-datepicker__close-icon:hover { background: transparent; }
+.react-datepicker__close-icon::after { background-color: var(--accent); }
+.react-datepicker__day--selected, .react-datepicker__day--keyboard-selected { background-color: var(--accent); color: white; }
+.react-datepicker__day:hover { background-color: #e7ede6; color: var(--ink); }
+.react-datepicker__input-container input { padding-right: 36px; }
+@media (min-width: 761px) { dialog.navigation-drawer[open] { display: none; } }
+@media (max-width: 760px) {
+  .app-shell, .app-shell--collapsed { grid-template-columns: 56px minmax(0, 1fr); }
+  .sidebar-brand { padding: 16px 6px; height: 80px; }
+  .sidebar-brand h1, .desktop-sidebar { display: none; }
+  .tasks { padding: 32px 16px 48px; }
+}
+@media (max-width: 520px) { fieldset { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .app-shell, button { transition: none; } }
